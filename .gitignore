@@ -1,0 +1,8 @@
+/backend/.env
+/backend/vendor
+/backend/storage/logs/*.log
+/backend/public/storage
+/frontend/.env
+/frontend/node_modules
+/frontend/dist
+.DS_Store
