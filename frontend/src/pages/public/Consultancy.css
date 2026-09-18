@@ -1,0 +1,598 @@
+/* ══════════════════════════════════════════════════════════════════
+   CONSULTANCY PAGE STYLES
+   ══════════════════════════════════════════════════════════════════ */
+
+.consult-main {
+  background: #f8fafc;
+  min-height: 100vh;
+  color: #1e293b;
+  font-family: inherit;
+}
+
+/* ─── Hero Section ──────────────────────────────────────────────── */
+.consult-hero {
+  background: linear-gradient(135deg, #0a3d2e 0%, #0d5940 50%, #137755 100%);
+  color: #ffffff;
+  padding: 60px 20px 70px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.consult-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(255, 118, 0, 0.15), transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(200, 233, 107, 0.12), transparent 50%);
+  pointer-events: none;
+}
+
+.consult-hero-container {
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.consult-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #c8e96b;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.consult-hero h1 {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #ffffff;
+  margin: 0 0 18px;
+}
+
+.consult-hero p {
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: #cbd5e1;
+  max-width: 720px;
+  margin: 0 auto 30px;
+}
+
+.consult-hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-consult-primary {
+  background: #ff7600;
+  color: #ffffff;
+  padding: 13px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(255, 118, 0, 0.35);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-consult-primary:hover {
+  background: #e66a00;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 118, 0, 0.45);
+  color: #ffffff;
+}
+
+.btn-consult-outline {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 13px 26px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-consult-outline:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+/* ─── Intro 2-Column Section ────────────────────────────────────── */
+.consult-intro {
+  background: #ffffff;
+  padding: 80px 20px;
+}
+
+.consult-intro-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.consult-eyebrow {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #ff7600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 10px;
+}
+
+.consult-intro h2 {
+  font-size: 34px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.3;
+  margin: 0 0 20px;
+}
+
+.consult-intro p {
+  color: #475569;
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0 0 16px;
+}
+
+.consult-intro-highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.consult-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #f8fafc;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border-left: 3px solid #10b981;
+}
+
+.consult-highlight-item span {
+  font-size: 18px;
+}
+
+.consult-highlight-item strong {
+  display: block;
+  font-size: 13.5px;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.consult-highlight-item small {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.consult-intro-image-wrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.12);
+  height: 480px;
+}
+
+.consult-intro-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.consult-image-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: rgba(10, 35, 25, 0.88);
+  backdrop-filter: blur(10px);
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.consult-image-badge strong {
+  display: block;
+  font-size: 15px;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.consult-image-badge span {
+  font-size: 12.5px;
+  color: #94a3b8;
+}
+
+/* ─── How It Works (Steps) ──────────────────────────────────────── */
+.consult-process {
+  background: #f1f5f9;
+  padding: 80px 20px;
+}
+
+.consult-section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 50px;
+}
+
+.consult-section-header h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 8px 0 14px;
+}
+
+.consult-section-header p {
+  font-size: 15.5px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.consult-steps-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.consult-step-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 32px 26px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e2e8f0;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.consult-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.consult-step-num {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #fff7ed;
+  color: #ff7600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  border: 2px solid #fed7aa;
+}
+
+.consult-step-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 10px;
+}
+
+.consult-step-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ─── Areas of Consultancy (6 Cards Grid) ───────────────────────── */
+.consult-services {
+  background: #ffffff;
+  padding: 80px 20px;
+}
+
+.consult-services-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.consult-service-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.consult-service-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  transform: translateY(-3px);
+}
+
+.consult-service-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: #f0fdf4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  border: 1px solid #bbf7d0;
+}
+
+.consult-service-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px;
+}
+
+.consult-service-card p {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ─── Booking Form Section ──────────────────────────────────────── */
+.consult-booking-section {
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 80px 20px;
+}
+
+.consult-booking-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.consult-booking-card .consult-section-header {
+  margin-bottom: 30px;
+}
+
+.consult-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.consult-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.consult-form-group.full-width {
+  grid-column: span 2;
+}
+
+.consult-form-group label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.consult-form-group input,
+.consult-form-group select,
+.consult-form-group textarea {
+  padding: 12px 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #0f172a;
+  font-family: inherit;
+  background: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.consult-form-group input:focus,
+.consult-form-group select:focus,
+.consult-form-group textarea:focus {
+  border-color: #ff7600;
+  box-shadow: 0 0 0 3px rgba(255, 118, 0, 0.15);
+}
+
+.consult-form-msg {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.consult-form-msg.success {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.consult-form-msg.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+.consult-submit-btn {
+  width: 100%;
+  background: #ff7600;
+  color: #ffffff;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(255, 118, 0, 0.3);
+}
+
+.consult-submit-btn:hover:not(:disabled) {
+  background: #e66a00;
+  transform: translateY(-2px);
+}
+
+.consult-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.consult-direct-contacts {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #f1f5f9;
+  flex-wrap: wrap;
+}
+
+.btn-contact-whatsapp {
+  background: #25d366;
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-contact-whatsapp:hover {
+  background: #1ebc59;
+  color: #ffffff;
+}
+
+.btn-contact-call {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-contact-call:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* ─── Bottom CTA Banner ─────────────────────────────────────────── */
+.consult-cta-banner {
+  background: linear-gradient(135deg, #0a3d2e 0%, #115e45 100%);
+  color: #ffffff;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.consult-cta-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.consult-cta-inner h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 10px 0 14px;
+  color: #ffffff;
+}
+
+.consult-cta-inner p {
+  color: #cbd5e1;
+  font-size: 15.5px;
+  line-height: 1.6;
+  margin-bottom: 26px;
+}
+
+.consult-cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .consult-intro-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .consult-steps-grid {
+    grid-template-columns: 1fr;
+  }
+  .consult-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .consult-hero h1 {
+    font-size: 30px;
+  }
+  .consult-intro h2 {
+    font-size: 26px;
+  }
+  .consult-intro-highlights {
+    grid-template-columns: 1fr;
+  }
+  .consult-services-grid {
+    grid-template-columns: 1fr;
+  }
+  .consult-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .consult-form-group.full-width {
+    grid-column: span 1;
+  }
+  .consult-booking-card {
+    padding: 24px 18px;
+  }
+}

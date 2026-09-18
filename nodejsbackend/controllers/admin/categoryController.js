@@ -1,3 +1,5 @@
+const fs       = require('fs');
+const path     = require('path');
 const slugify  = require('slugify');
 const Category = require('../../models/Category');
 
@@ -25,12 +27,24 @@ exports.store = async (req, res) => {
     const existing = await Category.findOne({ slug });
     if (existing) slug = `${slug}-${Date.now()}`;
 
+    let image = '';
+    if (req.file) {
+      image = `/uploads/categories/${req.file.filename}`;
+    } else if (req.body.image) {
+      image = req.body.image;
+    }
+
+    const isStatus = status !== undefined
+      ? (status === '1' || status === 1 || status === 'true' || status === true)
+      : true;
+
     const category = await Category.create({
       name: name.trim(),
       slug,
-      description: description || '',
-      sort_order:  sort_order  || 0,
-      status:      status !== undefined ? Boolean(Number(status)) : true,
+      description: description ? description.trim() : '',
+      image,
+      sort_order:  sort_order !== undefined ? Number(sort_order) : 0,
+      status:      isStatus,
     });
 
     return res.status(201).json({ success: true, data: category });
@@ -65,8 +79,22 @@ exports.update = async (req, res) => {
       category.name = name.trim();
     }
     if (description !== undefined) category.description = description;
-    if (sort_order  !== undefined) category.sort_order  = sort_order;
-    if (status      !== undefined) category.status      = Boolean(Number(status));
+    if (sort_order  !== undefined) category.sort_order  = Number(sort_order);
+    if (status      !== undefined) {
+      category.status = (status === '1' || status === 1 || status === 'true' || status === true);
+    }
+
+    if (req.file) {
+      if (category.image && category.image.startsWith('/uploads/categories/')) {
+        try {
+          const oldPath = path.join(__dirname, '..', '..', category.image);
+          if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+        } catch (_) {}
+      }
+      category.image = `/uploads/categories/${req.file.filename}`;
+    } else if (req.body.image !== undefined) {
+      category.image = req.body.image;
+    }
 
     await category.save();
     return res.json({ success: true, data: category });
@@ -80,6 +108,14 @@ exports.destroy = async (req, res) => {
   try {
     const category = await Category.findByIdAndDelete(req.params.id);
     if (!category) return res.status(404).json({ success: false, message: 'Category not found.' });
+
+    if (category.image && category.image.startsWith('/uploads/categories/')) {
+      try {
+        const oldPath = path.join(__dirname, '..', '..', category.image);
+        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+      } catch (_) {}
+    }
+
     return res.json({ success: true, message: 'Category deleted.' });
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message });
