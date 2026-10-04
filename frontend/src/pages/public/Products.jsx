@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link, useSearchParams } from "react-router-dom";
 import api from "../../api/client";
 import CowCard from "../../components/CowCard";
+import CowCardList from "../../components/CowCardList";
 import SEO from "../../components/common/SEO";
 import { useLocations } from "../../hooks/useLocations";
 
@@ -111,7 +112,10 @@ export default function Products() {
 
   // Sync state when URL searchParams change (e.g. Back/Forward button, filter URL mutations)
   useEffect(() => {
-    const pageFromUrl = Math.max(1, parseInt(searchParams.get("page"), 10) || 1);
+    const pageFromUrl = Math.max(
+      1,
+      parseInt(searchParams.get("page"), 10) || 1,
+    );
     setCurrentPage(pageFromUrl);
     setSelectedState(searchParams.get("state") || "");
     setSelectedCity(searchParams.get("city") || "");
@@ -222,19 +226,24 @@ export default function Products() {
     return pages;
   };
 
-  const startIndex = totalCount > 0 ? (currentPage - 1) * ITEMS_PER_PAGE + 1 : 0;
+  const startIndex =
+    totalCount > 0 ? (currentPage - 1) * ITEMS_PER_PAGE + 1 : 0;
   const endIndex = Math.min(currentPage * ITEMS_PER_PAGE, totalCount);
 
   // Dynamic SEO metadata
-  const locationLabel = [selectedCity, selectedState].filter(Boolean).join(", ");
-  const categoryLabel = slug ? slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()) : "";
+  const locationLabel = [selectedCity, selectedState]
+    .filter(Boolean)
+    .join(", ");
+  const categoryLabel = slug
+    ? slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())
+    : "";
   const dynamicSeoTitle = categoryLabel
     ? `${categoryLabel} for Sale ${locationLabel ? `in ${locationLabel}` : "in India"} — Verified Dairy Cattle`
     : search
-    ? `Search Results for "${search}" — Dairy Cattle Marketplace`
-    : locationLabel
-    ? `Dairy Cattle & Cows for Sale in ${locationLabel} — Pure Breeds`
-    : "Dairy Cattle for Sale — HF Cows, Murrah Buffaloes, Gir & Sahiwal";
+      ? `Search Results for "${search}" — Dairy Cattle Marketplace`
+      : locationLabel
+        ? `Dairy Cattle & Cows for Sale in ${locationLabel} — Pure Breeds`
+        : "Dairy Cattle for Sale — HF Cows, Murrah Buffaloes, Gir & Sahiwal";
 
   const dynamicSeoDesc = `Explore ${totalCount > 0 ? `${totalCount}+ ` : ""}verified dairy cattle ${categoryLabel ? `(${categoryLabel}) ` : ""}${locationLabel ? `available in ${locationLabel}` : "across India"}. Compare daily milk yield, lactation history, health cards, and direct breeder pricing.`;
   const dynamicKeywords = `${categoryLabel ? `${categoryLabel}, buy ${categoryLabel}, ` : ""}dairy cow for sale, milk cattle India, cattle prices, HF cows, Murrah buffalo, Sahiwal cow, Gir cow, Jaunpur dairy farm${locationLabel ? `, dairy farm ${locationLabel}` : ""}`;

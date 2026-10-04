@@ -1,61 +1,79 @@
 import { Link } from "react-router-dom";
 import { getImageUrl } from "../../utils/imageUrl";
-const slugify = (text) =>
-  text
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-export const SUPPLIERS = [
+import CowCardList from "../CowCardList";
+
+const SUPPLIERS = [
   {
-    id: 1,
-    name: "Dairy Farm",
-    location: "India",
-    memberSince: "2022",
-    ownerName: "User Name",
-    logo: "https://www.dairymitra.com/uploads/businessprofile/16741277974580.jpg",
+    id: "s1",
+    name: "Shree Krishna Dairy Farm",
+    state: "Punjab",
+    tags: "Cows • Buffaloes • Milk",
+    avatar: "/assets/suppliers/shree_krishna.jpg",
+    slug: "shree-krishna-dairy-farm",
   },
   {
-    id: 2,
-    name: "Dairy Farm",
-    location: "India",
-    memberSince: "2022",
-    ownerName: "User Name",
-    logo: "https://www.dairymitra.com/uploads/businessprofile/16741270577765.png",
+    id: "s2",
+    name: "Desi Gir Dairy Farm",
+    state: "Gujarat",
+    tags: "Gir Cows • A2 Milk • Calves",
+    avatar: "/assets/suppliers/desi_gir.jpg",
+    slug: "desi-gir-dairy-farm",
   },
   {
-    id: 3,
-    name: "Dairy Farm",
-    location: "India",
-    memberSince: "2022",
-    ownerName: "User Name",
-    logo: "https://www.dairymitra.com/uploads/businessprofile/16741272917369.png",
+    id: "s3",
+    name: "Murrah Star Dairy",
+    state: "Haryana",
+    tags: "Murrah Buffaloes • Semen • Feed",
+    avatar: "/assets/suppliers/murrah_star.jpg",
+    slug: "murrah-star-dairy",
   },
   {
-    id: 4,
-    name: "Dairy Farm",
-    location: "India",
-    memberSince: "2023",
-    ownerName: "User Name",
-    logo: "https://www.dairymitra.com/uploads/businessprofile/16741272345017.png",
+    id: "s4",
+    name: "Suresh Dairy Farm",
+    state: "Uttar Pradesh",
+    tags: "HF Cows • Heifers • Milk",
+    avatar: "/assets/suppliers/suresh_dairy.jpg",
+    slug: "suresh-dairy-farm",
   },
   {
-    id: 5,
-    name: "Marwah Dairy Farm",
-    location: "Karnal",
-    memberSince: "2023",
-    ownerName: "Jaspreet",
-    logo: "https://www.dairymitra.com/uploads/businessprofile/16741271727069.png",
+    id: "s5",
+    name: "Raj Dairy Products",
+    state: "Maharashtra",
+    tags: "Milk Products • Paneer • Ghee",
+    avatar: "/assets/suppliers/raj_dairy.jpg",
+    slug: "raj-dairy-products",
   },
   {
-    id: 6,
-    name: "Dharamvir Dairy Farm",
-    location: "Karnal",
-    memberSince: "2023",
-    ownerName: "Dharamvir",
-    logo: "https://www.dairymitra.com/uploads/businessprofile/16741271562255.png",
+    id: "s6",
+    name: "Green Feast Solutions",
+    state: "Rajasthan",
+    tags: "Fodder • Silage • Cattle Feed",
+    avatar: "/assets/suppliers/green_feast.jpg",
+    slug: "green-feast-solutions",
+  },
+  {
+    id: "s7",
+    name: "Shakti Dairy Equipments",
+    state: "Punjab",
+    tags: "Milking Machine • Chillers • Tanks",
+    avatar: "/assets/suppliers/shakti_equip.jpg",
+    slug: "shakti-dairy-equipments",
+  },
+  {
+    id: "s8",
+    name: "Anand Dairy Farm",
+    state: "Madhya Pradesh",
+    tags: "Cows • Buffaloes • Breeding",
+    avatar: "/assets/suppliers/anand_dairy.jpg",
+    slug: "anand-dairy-farm",
+  },
+  {
+    id: "s9",
+    name: "Kisan Nutrition",
+    state: "Gujarat",
+    tags: "Mineral Mix • Supplements • Feed",
+    avatar: "/assets/suppliers/kisan_nutrition.jpg",
+    slug: "kisan-nutrition",
   },
 ];
 
@@ -80,66 +98,21 @@ export default function SuppliersSection({ suppliers, sellers }) {
   const displaySuppliers = dynamicSuppliers;
 
   return (
-    <section className="dm-section suppliers-section">
-      <div className="section-inner">
-        <div className="section-head">
-          <span className="eyebrow">Verified Partners</span>
-          <h2>Meet Trusted Suppliers Network Across India</h2>
-          <p>
+    <section className="pd-sellers-sec">
+      <div className="pashu-container">
+        <div className="pd-section-header">
+          <span className="pd-section-tag">FEATURED SELLERS</span>
+          <h2 className="pd-section-title">
+            Connect with Trusted Suppliers Across India for Quality Animal
+          </h2>
+          <p className="pd-section-sub">
             Connect with India's top-rated dairy animal suppliers — verified,
             reviewed, and ready to serve.
           </p>
         </div>
-        <div className="supplier-grid-pro">
-          {displaySuppliers.map((s) => (
-            <div className="supplier-card-pro" key={s.id}>
-              {/* Featured badge top-right */}
-              <div className="supplier-card-badge">⭐ FEATURED</div>
 
-              {/* Left: Farm Circular/Emblem Logo */}
-              <div className="supplier-logo-side">
-                <img
-                  src={s.logo}
-                  alt={s.business_name}
-                  loading="lazy"
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?w=150&q=80";
-                  }}
-                />
-              </div>
+        <CowCardList displaySuppliers={displaySuppliers} />
 
-              {/* Right: Farm Info & Actions */}
-              <div className="supplier-info-side">
-                <Link
-                  to={`/supplier/${slugify(s.name)}`}
-                  className="supplier-name-link"
-                >
-                  {s.name}
-                </Link>
-                <div className="supplier-meta-list">
-                  <div className="supplier-meta-item">
-                    <b>📍 {s.location}</b>
-                  </div>
-                  <div className="supplier-meta-item">
-                    <span>Member Since :</span>
-                    <b>{s.memberSince}</b>
-                  </div>
-                  <div className="supplier-meta-item">
-                    <span>Owner Name :</span>
-                    <b>{s.ownerName}</b>
-                  </div>
-                </div>
-                <Link
-                  to={`/supplier/${slugify(s.name)}`}
-                  className="supplier-catalogue-btn"
-                >
-                  View Catalogue ➔
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
         <div style={{ textAlign: "center", marginTop: 32 }}>
           <Link className="btn-orange" to="/pashu">
             View All Suppliers →

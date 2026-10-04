@@ -946,7 +946,7 @@ body {
 }
 
 .cattle-img-wrap {
-  width: 140px;
+  width: 160px;
   height: 130px;
   flex-shrink: 0;
   overflow: hidden;
@@ -2861,6 +2861,9 @@ body {
 .breed-card-pro:hover .breed-card-pro-img img {
   transform: scale(1.08);
 }
+.cattle-img-wrap:hover img {
+  transform: scale(1.08);
+}
 .breed-card-pro-overlay {
   position: absolute;
   inset: 0;
@@ -2929,9 +2932,9 @@ body {
   right: 0;
   background: var(--orange);
   color: #fff;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  padding: 4px 12px;
+  padding: 4px 4px;
   border-radius: 0 8px 0 8px;
   display: inline-flex;
   align-items: center;
@@ -3002,8 +3005,8 @@ body {
 }
 
 .supplier-catalogue-btn {
-  color: var(--orange);
-  font-size: 13.5px;
+  color: var(--orange) !important;
+  font-size: 13.5px !important;
   font-weight: 700;
   text-decoration: none;
   display: inline-flex;
@@ -3865,6 +3868,10 @@ body {
   gap: 14px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
+.pd-seller-card:hover {
+  box-shadow: 0 8px 24px rgba(255, 118, 0, 0.12);
+  transform: scale(1.06) !important;
+}
 .pd-seller-avatar {
   width: 52px;
   height: 52px;
@@ -3883,6 +3890,10 @@ body {
   font-weight: 700;
   color: var(--dark);
   margin-bottom: 2px;
+}
+.pd-seller-verfiedv1 {
+  color: #fff !important;
+  margin-bottom: 0px !important;
 }
 .pd-seller-info span {
   font-size: 12px;

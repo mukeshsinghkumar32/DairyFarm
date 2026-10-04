@@ -1,61 +1,31 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function ConsultationSection() {
-  const [phone, setPhone] = useState("");
-  const [consultMsg, setConsultMsg] = useState("");
-
-  const handleConsult = (e) => {
-    e.preventDefault();
-    setConsultMsg("✅ Thank you! Our expert will call you shortly.");
-    setPhone("");
-    setTimeout(() => setConsultMsg(""), 4000);
-  };
-
   return (
-    <section className="dm-section consult-section">
-      <div className="consult-inner">
-        <div className="section-head">
-          <span className="eyebrow">Expert Guidance</span>
-          <h2>Talk to a Dairy Expert — Free Consultation</h2>
-          <p>
-            Enter your number and let our dairy specialists call you to find
-            the perfect cattle for your farm
-          </p>
-        </div>
-        {consultMsg ? (
-          <p
-            style={{
-              textAlign: "center",
-              color: "var(--green)",
-              fontWeight: 700,
-              fontSize: 15,
-            }}
-          >
-            {consultMsg}
-          </p>
-        ) : (
-          <form className="consult-form" onSubmit={handleConsult}>
-            <input
-              type="tel"
-              placeholder="Enter your mobile number..."
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
+    <section className="pd-consult-sec">
+      <div className="pashu-container">
+        <div className="pd-consult-banner">
+          <div className="pd-consult-img">
+            <img
+              src="/assets/vet-cow-consult.jpg"
+              alt="Veterinary Dairy Cow Doctor Consultation"
+              loading="lazy"
             />
-            <button type="submit">Get Expert Call →</button>
-          </form>
-        )}
-        <p
-          style={{
-            textAlign: "center",
-            marginTop: 12,
-            fontSize: 12,
-            color: "#000",
-            fontWeight: 500,
-          }}
-        >
-          🔒 We respect your privacy. No spam calls, ever.
-        </p>
+          </div>
+          <div className="pd-consult-body">
+            <span className="pd-consult-tag">EXPERT ADVICE</span>
+            <h2 className="pd-consult-title">
+              Talk to a Dairy Expert – Free Consultation
+            </h2>
+            <p className="pd-consult-desc">
+              Get professional advice on animal health, nutrition, breeding and
+              dairy management from our certified experts.
+            </p>
+            <Link to="/consultancy" className="pd-btn-consult">
+              Book Free Consultation &rarr;
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

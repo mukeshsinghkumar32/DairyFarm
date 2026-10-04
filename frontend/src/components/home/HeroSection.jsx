@@ -2,51 +2,50 @@ import { Link } from "react-router-dom";
 
 export default function HeroSection() {
   return (
-    <section className="dm-hero">
-      <div className="dm-hero-inner">
-        <div className="dm-hero-content animate-fade-in">
-          <div className="dm-hero-eyebrow">
-            🏆 India's No. 1 B2B Dairy Animal Marketplace
-          </div>
-          <h1>
+    <section className="pd-hero-banner">
+      <div className="pashu-container pd-hero-inner">
+        {/* Left Column: Headline & 3 CTAs */}
+        <div className="pd-hero-left">
+          <h1 className="pd-hero-title">
             Buy and Sell
-            <br />
-            <em>High-Quality Breeding Cattle</em>
-            <br />
-            Contact us Today!
+            <span className="pd-hero-highlight">High-Quality Dairy Animals</span>
+            with Confidence
           </h1>
-          <p className="dm-hero-sub">
-            Connect buyers and sellers across India. Find verified dairy animals
-            with detailed breed info, health records, and competitive pricing —
-            all in one platform.
+          <p className="pd-hero-desc">
+            Connect directly with verified farmers and dairy sellers across India.
+            Find healthy cows, buffaloes, milk products, feed, fodder and dairy
+            equipment &mdash; all in one place.
           </p>
-          <div className="dm-hero-actions">
-            <Link className="btn-orange" to="/pashu">
-              🐄 Browse Pashu
+          <div className="pd-hero-buttons">
+            <Link className="pd-hero-btn-primary" to="/pashu">
+              Browse Dairy Animals
             </Link>
-            <Link className="btn-outline-white" to="/free-listing">
-              📋 List for Free
+            <Link className="pd-hero-btn-glass" to="/seller/register">
+              List Your Dairy Product
             </Link>
-            <a className="btn-outline-white" href="tel:+918208127243">
-              ☎ Talk to Expert
-            </a>
+            <Link className="pd-hero-btn-glass" to="/consultancy">
+              Talk to Expert
+            </Link>
           </div>
         </div>
-        <div className="dm-hero-stats animate-fade-in-2">
-          <div className="stat-bubble orange">
-            <strong>1500+</strong>
-            <span>Buyers &amp; Sellers Served</span>
+
+        {/* Right Column: 3 Stacked Stat Badges */}
+        <div className="pd-hero-stats">
+          <div className="pd-hero-stat-box pd-stat-orange">
+            <span className="pd-stat-val">15000+</span>
+            <span className="pd-stat-lbl">Happy Farmers</span>
           </div>
-          <div className="stat-bubble">
-            <strong>2500+</strong>
-            <span>Customers Satisfied</span>
+          <div className="pd-hero-stat-box pd-stat-green-bright">
+            <span className="pd-stat-val">2500+</span>
+            <span className="pd-stat-lbl">Verified Sellers</span>
           </div>
-          <div className="stat-bubble">
-            <strong>2000+</strong>
-            <span>Businesses Listed</span>
+          <div className="pd-hero-stat-box pd-stat-green-dark">
+            <span className="pd-stat-val">2000+</span>
+            <span className="pd-stat-lbl">Products Listed</span>
           </div>
         </div>
       </div>
     </section>
   );
 }
+

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./styles.css";
+import "./styles/pashudairy.css";
 
 // Safeguard against third-party scripts, browser extensions, and Google Translate
 // mutating DOM text nodes and causing React's removeChild / insertBefore to throw NotFoundError.

@@ -1,83 +1,120 @@
 import { Link } from "react-router-dom";
-import CowCard from "../CowCard";
 
-export const PREMIUM_LISTINGS = [
+const PREMIUM_SUPPLIES = [
   {
-    id: 1,
-    title: "HF Cow — High Yield",
-    company: "Dairy Farm",
-    location: "India, India",
-    ownerName: "User Name",
-    img: "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?w=400&q=80",
+    id: "p1",
+    name: "Shama Feed 50kg",
+    price: 1350,
+    unit: "Bag",
+    rating: "4.9",
+    reviews: 120,
+    image: "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?w=500&q=80",
+    slug: "shama-feed-50kg",
+    action: "Add to Cart",
   },
   {
-    id: 2,
-    title: "Pure Gir Cow",
-    company: "Gir Farm",
-    location: "India, India",
-    ownerName: "User Name",
-    img: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=400&q=80",
+    id: "p2",
+    name: "Mineral Mixture",
+    price: 650,
+    unit: "Bag",
+    rating: "4.7",
+    reviews: 95,
+    image: "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?w=500&q=80",
+    slug: "mineral-mixture",
+    action: "Add to Cart",
   },
   {
-    id: 3,
-    title: "Murrah Buffalo",
-    company: "Breeders",
-    location: "India India",
-    ownerName: "User Name",
-    img: "https://images.unsplash.com/photo-1501706362039-c06b2d715385?w=400&q=80",
+    id: "p3",
+    name: "Milk Chiller 500L",
+    price: 185000,
+    unit: "Unit",
+    rating: "4.8",
+    reviews: 34,
+    image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=500&q=80",
+    slug: "milk-chiller-500l",
+    action: "Ask for Price",
   },
   {
-    id: 4,
-    title: "Sahiwal Cow",
-    company: "Livestock",
-    location: "India, India",
-    ownerName: "User Name",
-    img: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&q=80",
+    id: "p4",
+    name: "Milking Machine",
+    price: 45000,
+    unit: "Unit",
+    rating: "4.9",
+    reviews: 110,
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=500&q=80",
+    slug: "milking-machine",
+    action: "Ask for Price",
+  },
+  {
+    id: "p5",
+    name: "Cattle Calcium",
+    price: 1050,
+    unit: "Pack",
+    rating: "4.8",
+    reviews: 75,
+    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&q=80",
+    slug: "cattle-calcium",
+    action: "Add to Cart",
   },
 ];
 
-export default function FeaturedCattleSection({ products = [] }) {
-  const displayProducts =
-    products && products.length > 0 ? products.slice(0, 4) : PREMIUM_LISTINGS;
-
+export default function FeaturedCattleSection() {
   return (
-    <section className="dm-section premium-section">
-      <div className="section-inner">
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            marginBottom: 28,
-            flexWrap: "wrap",
-            gap: 12,
-          }}
-        >
-          <div>
-            <span
-              className="eyebrow"
-              style={{
-                display: "block",
-                marginBottom: 4,
-                color: "#ff7602",
-                fontWeight: 600,
-              }}
-            >
-              Featured Cattle
-            </span>
-            <h2 style={{ margin: 0 }}>
-              Grow Your Dairy Business with High-Quality Cattle
-            </h2>
-          </div>
-          <Link to="/pashu" className="view-all-link">
-            View All Listings →
-          </Link>
+    <section className="pd-products-sec">
+      <div className="pashu-container">
+        <div className="pd-section-header">
+          <span className="pd-section-tag">FEATURED PRODUCTS</span>
+          <h2 className="pd-section-title">
+            Premium Dairy Products &amp; Supplies
+          </h2>
+          <p className="pd-section-sub">
+            Best quality products for healthy animals and profitable dairy farming.
+          </p>
         </div>
 
-        <div className="products-grid">
-          {displayProducts.map((p) => (
-            <CowCard key={p._id || p.id} cow={p} />
+        <div className="pd-products-grid">
+          {PREMIUM_SUPPLIES.map((prod) => (
+            <div key={prod.id} className="pd-product-card">
+              <Link to={`/pashu?search=${encodeURIComponent(prod.name)}`} className="pd-product-thumb">
+                <img
+                  src={prod.image}
+                  alt={prod.name}
+                  loading="lazy"
+                />
+              </Link>
+              <div className="pd-product-body">
+                <Link to={`/pashu?search=${encodeURIComponent(prod.name)}`} style={{ textDecoration: "none" }}>
+                  <h3 className="pd-product-title" title={prod.name}>
+                    {prod.name}
+                  </h3>
+                </Link>
+                <div className="pd-product-price">
+                  ₹ {prod.price.toLocaleString("en-IN")}{" "}
+                  <span style={{ fontSize: 12, fontWeight: 500, color: "#64748b" }}>
+                    / {prod.unit}
+                  </span>
+                </div>
+                <div className="pd-product-rating">
+                  <span className="pd-stars">★★★★★</span>
+                  <span>
+                    {prod.rating} ({prod.reviews})
+                  </span>
+                </div>
+                <Link
+                  to={`/contact-us?product=${encodeURIComponent(prod.name)}`}
+                  className="pd-btn-product-action"
+                >
+                  {prod.action}
+                </Link>
+              </div>
+            </div>
           ))}
+        </div>
+
+        <div className="pd-btn-center-wrap">
+          <Link to="/pashu" className="pd-btn-view-all">
+            View All Products &rarr;
+          </Link>
         </div>
       </div>
     </section>

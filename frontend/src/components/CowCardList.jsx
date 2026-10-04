@@ -58,7 +58,6 @@ export default function CowCardList({
       single.ownerName ||
       single.owner_name ||
       single.seller?.name ||
-      single.seller_id?.name ||
       single.company ||
       "Verified Seller";
 
@@ -68,17 +67,22 @@ export default function CowCardList({
 
     return (
       <Link to={targetLink} className="pd-seller-card">
-        <Link className="cattle-img-wrap">
+        {/* Left: Avatar with green border ring and mini verified check badge */}
+        <div className="pd-seller-avatar-wrap">
           <img
             src={logo}
             alt={name}
+            className="pd-seller-avatar"
             loading="lazy"
             onError={(e) => {
-              e.currentTarget.src =
-                "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=400&q=80";
+              e.currentTarget.src = "/assets/suppliers/shree_krishna.jpg";
             }}
           />
-        </Link>
+          <span className="pd-avatar-mini-badge" title="Verified Seller">
+            ✓
+          </span>
+        </div>
+
         {/* Right: Details */}
         <div className="pd-seller-info">
           <div className="pd-seller-badge-verified">
@@ -99,7 +103,7 @@ export default function CowCardList({
             <span className="pd-member">
               {isCowProduct ? "Farm / Owner " : "Owner Name "}
             </span>
-            <b style={{ color: "#ff7602" }}>{ownerName}</b>
+            <b>{ownerName}</b>
           </div>
           <span className="supplier-catalogue-btn">
             {isCowProduct ? "View Details ➔" : "View Catalogue ➔"}
@@ -192,7 +196,7 @@ export default function CowCardList({
             </div>
             <div className="pd-seller-tags">
               <span className="pd-member">Owner Name </span>
-              <b>{seller.ownerName}</b>
+              <b style={{ color: "#ff7602" }}>{seller.ownerName}</b>
             </div>
             <span className="supplier-catalogue-btn">View Catalogue ➔</span>
           </div>

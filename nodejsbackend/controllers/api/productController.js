@@ -7,7 +7,8 @@ const PER_PAGE = 10;
 exports.seller = async (req, res) => {
   try {
     const page = parseInt(req.query.page, 10) || 1;
-    const perPage = parseInt(req.query.per_page || req.query.limit, 10) || PER_PAGE;
+    const perPage =
+      parseInt(req.query.per_page || req.query.limit, 10) || PER_PAGE;
     const skip = (page - 1) * perPage;
 
     const query = {};
@@ -39,13 +40,25 @@ exports.seller = async (req, res) => {
       ];
     }
 
-    if (req.query.state && req.query.state !== "all" && req.query.state.trim() !== "") {
+    if (
+      req.query.state &&
+      req.query.state !== "all" &&
+      req.query.state.trim() !== ""
+    ) {
       query.state = { $regex: new RegExp(req.query.state.trim(), "i") };
     }
-    if (req.query.city && req.query.city !== "all" && req.query.city.trim() !== "") {
+    if (
+      req.query.city &&
+      req.query.city !== "all" &&
+      req.query.city.trim() !== ""
+    ) {
       query.city = { $regex: new RegExp(req.query.city.trim(), "i") };
     }
-    if (req.query.location && req.query.location !== "all" && req.query.location.toLowerCase() !== "all india") {
+    if (
+      req.query.location &&
+      req.query.location !== "all" &&
+      req.query.location.toLowerCase() !== "all india"
+    ) {
       const locRegex = new RegExp(req.query.location.trim(), "i");
       query.$or = [
         { state: locRegex },
@@ -64,17 +77,25 @@ exports.seller = async (req, res) => {
       Seller.countDocuments(query),
     ]);
 
-    // Attach product count for each seller
-    const sellersWithCount = await Promise.all(
-      sellers.map(async (s) => {
-        const product_count = await Product.countDocuments({
-          seller_id: s._id,
-        });
-        const json = s.toJSON();
-        json.product_count = product_count;
-        return json;
-      }),
-    );
+    // Attach product count for each seller in a single aggregation query
+    let countMap = {};
+    if (sellers.length > 0) {
+      const sellerIds = sellers.map((s) => s._id);
+      const counts = await Product.aggregate([
+        { $match: { seller_id: { $in: sellerIds } } },
+        { $group: { _id: "$seller_id", count: { $sum: 1 } } },
+      ]);
+      countMap = counts.reduce((acc, item) => {
+        acc[item._id.toString()] = item.count;
+        return acc;
+      }, {});
+    }
+
+    const sellersWithCount = sellers.map((s) => {
+      const json = s.toJSON ? s.toJSON() : s;
+      json.product_count = countMap[s._id.toString()] || 0;
+      return json;
+    });
 
     return res.json({
       success: true,
@@ -193,15 +214,26 @@ exports.sellerDetails = async (req, res) => {
 exports.index = async (req, res) => {
   try {
     const page = Math.max(1, parseInt(req.query.page, 10) || 1);
-    const perPage = Math.min(100, Math.max(1, parseInt(req.query.per_page || req.query.limit, 10) || PER_PAGE));
+    const perPage = Math.min(
+      100,
+      Math.max(
+        1,
+        parseInt(req.query.per_page || req.query.limit, 10) || PER_PAGE,
+      ),
+    );
     const skip = (page - 1) * perPage;
 
     const query = { status: true };
-    if (req.query.featured === "1" || req.query.featured === "true") query.featured = true;
+    if (req.query.featured === "1" || req.query.featured === "true")
+      query.featured = true;
     if (req.query.availability) query.availability = req.query.availability;
 
     // Category filter (support ObjectId or slug)
-    if (req.query.category && req.query.category !== "all" && req.query.category !== "") {
+    if (
+      req.query.category &&
+      req.query.category !== "all" &&
+      req.query.category !== ""
+    ) {
       if (mongoose.Types.ObjectId.isValid(req.query.category)) {
         query.category_id = req.query.category;
       } else {
@@ -225,12 +257,22 @@ exports.index = async (req, res) => {
 
     // State & City filters
     const andConds = [];
-    if (req.query.state && req.query.state.trim() && req.query.state !== "All" && req.query.state !== "all") {
+    if (
+      req.query.state &&
+      req.query.state.trim() &&
+      req.query.state !== "All" &&
+      req.query.state !== "all"
+    ) {
       andConds.push({
         location: { $regex: new RegExp(req.query.state.trim(), "i") },
       });
     }
-    if (req.query.city && req.query.city.trim() && req.query.city !== "All" && req.query.city !== "all") {
+    if (
+      req.query.city &&
+      req.query.city.trim() &&
+      req.query.city !== "All" &&
+      req.query.city !== "all"
+    ) {
       andConds.push({
         location: { $regex: new RegExp(req.query.city.trim(), "i") },
       });
@@ -248,7 +290,11 @@ exports.index = async (req, res) => {
     const sortParam = (req.query.sort || "newest").toLowerCase();
     if (sortParam === "oldest" || sortParam === "old") {
       sortObj = { featured: -1, createdAt: 1 };
-    } else if (sortParam === "newest" || sortParam === "new" || sortParam === "latest") {
+    } else if (
+      sortParam === "newest" ||
+      sortParam === "new" ||
+      sortParam === "latest"
+    ) {
       sortObj = { featured: -1, createdAt: -1 };
     } else if (sortParam === "price-low" || sortParam === "price_asc") {
       sortObj = { price: 1, createdAt: -1 };
@@ -259,6 +305,7 @@ exports.index = async (req, res) => {
     const [products, total] = await Promise.all([
       Product.find(query)
         .populate("category_id", "name slug")
+        .populate("seller_id", "name")
         .sort(sortObj)
         .skip(skip)
         .limit(perPage),

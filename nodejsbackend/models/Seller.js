@@ -53,6 +53,8 @@ const sellerSchema = new mongoose.Schema(
   },
 );
 
+sellerSchema.index({ status: 1, featured: -1, createdAt: -1 });
+
 // Virtual Populate for SellerAbout & SellerBanner
 sellerSchema.virtual("sellerAbout", {
   ref: "SellerAbout",
